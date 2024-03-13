@@ -30,7 +30,7 @@ def scale_calibration(img):
     return calibration
 
 
-def fiberLen(img, calibration, plot=True):
+def fiber_length(img, calibration, plot=True):
 
     # read img
     fiber = MyImage(img)
@@ -107,7 +107,3 @@ def fiberLen(img, calibration, plot=True):
         plt.imshow(fiber_copy)
 
     return [filename, measurement]
-
-
-print(fiberLen("lines.png", 0.1))
-print(fiberLen("lines.png", 1))

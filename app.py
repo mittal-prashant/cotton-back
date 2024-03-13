@@ -11,7 +11,7 @@ import os
 import cv2
 from werkzeug.utils import secure_filename
 from gridfs import GridFS
-from lines import fiberLen
+from lines import fiber_length
 
 import certifi
 
@@ -129,7 +129,7 @@ def processImage(filename, operation, scale):
         case "getD":
             return img.shape
         case "lines":
-            res = fiberLen(f"uploads/{filename}", scale)
+            res = fiber_length(f"uploads/{filename}", scale)
             print(res)
             return res
 
