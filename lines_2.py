@@ -30,7 +30,7 @@ def scale_calibration(img):
     return calibration
 
 
-def fiber_length(img, calibration, plot=True):
+def fiber_length_2(img, calibration, plot=True):
 
     # read img
     fiber = MyImage(img)

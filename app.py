@@ -11,7 +11,8 @@ import os
 import cv2
 from werkzeug.utils import secure_filename
 from gridfs import GridFS
-from lines import fiber_length
+from lines_1 import fiber_length_1
+from lines_2 import fiber_length_2
 
 import certifi
 
@@ -108,7 +109,7 @@ def change_resolution(image, scale_percent):
     return resized_image
 
 
-def processImage(filename, operation, scale):
+def processImage(filename, operation, scale, method):
     print(f"the operation is {operation} and filename is {filename}")
     img = cv2.imread(f"uploads/{filename}")
     match operation:
@@ -129,7 +130,10 @@ def processImage(filename, operation, scale):
         case "getD":
             return img.shape
         case "lines":
-            res = fiber_length(f"uploads/{filename}", scale)
+            if method == 1:
+                res = fiber_length_1(f"uploads/{filename}", scale)
+            if method == 2:
+                res = fiber_length_1(f"uploads/{filename}", scale)
             print(res)
             return res
 
@@ -154,11 +158,12 @@ def upload_file():
         )
 
         # scale = request.json.get("scale")
+        method = request.json.get("method")
 
         user = users_collection.find_one({"username": current_user})
         uploads_collection.insert_one({"filid": file_id, "uploaded_by": user["_id"]})
 
-        res = processImage(file.filename, "lines", 1)
+        res = processImage(file.filename, "lines", 1, method)
         return jsonify({"length": res}), 200
 
 
